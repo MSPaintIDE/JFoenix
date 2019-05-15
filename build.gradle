@@ -4,7 +4,6 @@ buildscript {
         mavenCentral()
     }
 }
-
 plugins {
     id 'com.jfrog.bintray' version '1.7.3' apply false
     id 'com.github.ben-manes.versions' version '0.15.0' apply false
@@ -12,13 +11,19 @@ plugins {
     id 'com.github.hierynomus.license' version '0.14.0' apply false
     id 'net.nemerosa.versioning' version '2.6.1' apply false
     id 'org.sonarqube' version '2.5'
+    id 'org.openjfx.javafxplugin' version '0.0.6' apply false
+    id 'maven'
 }
+
+project.version = '9.0.8-J12'
 
 subprojects {
     afterEvaluate {
         apply plugin: 'java'
         apply plugin: 'com.github.ben-manes.versions'
         apply plugin: 'net.nemerosa.versioning'
+        apply plugin: 'org.openjfx.javafxplugin'
+        apply plugin: 'maven'
 
         // end::autoModuleName[]
         repositories {
@@ -27,11 +32,26 @@ subprojects {
             maven { url 'http://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2' }
         }
 
-        sourceCompatibility = 1.9
-        targetCompatibility = 1.9
+        sourceCompatibility = 12
+        targetCompatibility = 12
+
+        project.version = '9.0.8-J12'
 
         tasks.withType(JavaCompile) {
             options.incremental = true
+        }
+
+        configurations {
+            javafxCompile
+        }
+
+        dependencies {
+            javafxCompile "org.openjfx:javafx-base:12.0.1:win"
+            javafxCompile "org.openjfx:javafx-graphics:12.0.1:win"
+            javafxCompile "org.openjfx:javafx-controls:12.0.1:win"
+            javafxCompile "org.openjfx:javafx-fxml:12.0.1:win"
+
+            compile configurations.javafxCompile
         }
 
         // tag::autoModuleName[]
@@ -65,6 +85,8 @@ subprojects {
                     "--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix",
                     "--add-exports=javafx.graphics/com.sun.javafx.util=com.jfoenix",
                     "--add-exports=javafx.graphics/com.sun.javafx.scene.traversal=com.jfoenix",
+                    "--add-exports=javafx.graphics/jabafx=com.jfoenix",
+                    "--add-exports=javafx.controls/javafx.scene.control.skin=com.jfoenix",
 
                     // For various behaviors across controls
                     "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",

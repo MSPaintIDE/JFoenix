@@ -56,7 +56,8 @@ public class JFXTextFieldSkin<T extends TextField & IFXLabelFloatControl> extend
         textPane = (Pane) this.getChildren().get(0);
 
         // get parent fields
-        textNode = ReflectionHelper.getFieldContent(TextFieldSkin.class, this, "textNode");
+//        textNode = ReflectionHelper.getFieldContent(TextFieldSkin.class, this, "textNode");
+        textNode = textPane.getChildren().get(1);
         textTranslateX = ReflectionHelper.getFieldContent(TextFieldSkin.class, this, "textTranslateX");
         textRight = ReflectionHelper.getFieldContent(TextFieldSkin.class, this, "textRight");
 
@@ -149,6 +150,7 @@ public class JFXTextFieldSkin<T extends TextField & IFXLabelFloatControl> extend
 
         try {
             Field field = ReflectionHelper.getField(TextFieldSkin.class, "promptNode");
+            field.setAccessible(true);
             Object oldValue = field.get(this);
             if (oldValue != null) {
                 textPane.getChildren().remove(oldValue);

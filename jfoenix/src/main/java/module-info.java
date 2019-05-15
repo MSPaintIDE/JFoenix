@@ -18,10 +18,12 @@
  */
 
 module com.jfoenix{
-    requires javafx.controls;
     requires java.logging;
     requires java.xml;
     requires jdk.unsupported;
+    requires javafx.base;
+    requires javafx.graphics;
+    requires javafx.controls;
 
     exports com.jfoenix.assets;
     exports com.jfoenix.cache;
@@ -35,7 +37,7 @@ module com.jfoenix{
     exports com.jfoenix.transitions;
     exports com.jfoenix.animation;
     exports com.jfoenix.transitions.hamburger;
-    exports com.jfoenix.transitions.template;
+//    exports com.jfoenix.transitions.template;
     exports com.jfoenix.utils;
 
     exports com.jfoenix.controls.datamodels.treetable;
@@ -44,8 +46,8 @@ module com.jfoenix{
     exports com.jfoenix.controls.cells.editors.base;
     exports com.jfoenix.animation.alert;
 
-    opens com.jfoenix.assets.css;
-    opens com.jfoenix.assets.css.controls;
-    opens com.jfoenix.assets.font.roboto;
+//    opens com.jfoenix.assets.css;
+//    opens com.jfoenix.assets.css.controls;
+//    opens com.jfoenix.assets.font.roboto;
 
 }

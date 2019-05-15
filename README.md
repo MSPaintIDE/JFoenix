@@ -24,6 +24,11 @@
 * JFoenix for Android - [download jar](https://search.maven.org/remotecontent?filepath=com/jfoenix/jfoenix/8.0.8/jfoenix-8.0.8-retrolambda.jar)
 * Released builds are available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7CJFoenix)
 
+# Note on the fork
+This fork was made to allow Java 12, and the current master goes off of the [JFoenix-9.0.0](https://github.com/jfoenixadmin/JFoenix/tree/JFoenix-9.0.0) branch of JFoenix. This is messy and there's better ways to do almost everything changed, but it works and I couldn't give two shits. This _will_ disbanded if JFoenix natively supports Java 12, though it seems like they won't, at least for the next few years.
+
+Honestly, there's probably going to be shit broken with it and you can make a PR or something to fix it, since this is actively being used in a project.
+
 # Using JFoenix already?
 Feel free to submit your project info to the following <a href="mailto:developers@jfoenix.com" target="_top">email</a>, to be posted on JFoenix github.
 * One more thing, all contributions are appreciated. Don't hesitate to add your own contributions to JFoenix :)
@@ -59,13 +64,11 @@ If you like JFoenix :) and want to support this project, you can become a backer
 
 
 # Build
-To build JFoenix, execute the following command:
+To build JFoenix with Java 12, I usually run the following command:
 
-    gradlew build
+    clean build install -x myJavadocs
 
-To run the main demo, execute the following command:
-
-    gradlew run
+There's probably a better way to do this, but this keeps it local and it works.
 
 **NOTE** : You need to set JAVA_HOME environment variable to point to Java 1.8 directory.
 
@@ -87,8 +90,7 @@ repositories {
 Reference the repository from this location using:
 ```
 dependencies {
-    compile 'com.jfoenix:jfoenix:8.0.8' // Java 8
-    compile 'com.jfoenix:jfoenix:9.0.8' // Java 9
+    compile 'com.jfoenix:jfoenix:9.0.8-J12' // Java 12
 }
 ```
 
@@ -98,13 +100,7 @@ dependencies {
 <dependency>
     <groupId>com.jfoenix</groupId>
     <artifactId>jfoenix</artifactId>
-    <version>9.0.8</version>
-</dependency>
-
-<dependency>
-    <groupId>com.jfoenix</groupId>
-    <artifactId>jfoenix</artifactId>
-    <version>8.0.8</version>
+    <version>9.0.8-J12</version>
 </dependency>
 ```
 # Components

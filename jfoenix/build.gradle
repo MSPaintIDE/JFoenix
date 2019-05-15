@@ -1,6 +1,7 @@
 apply plugin: 'osgi'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'java-library'
+apply plugin: 'maven'
 
 apply from: rootProject.file('gradle/license.gradle')
 
@@ -48,7 +49,9 @@ task myJavadocs(type: Javadoc) {
                    "javafx.graphics/com.sun.javafx.scene.traversal=com.jfoenix",
                    "javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
                    "javafx.controls/com.sun.javafx.scene.control.inputmap=com.jfoenix",
-                   "javafx.controls/com.sun.javafx.scene.control=com.jfoenix"])
+                   "javafx.controls/com.sun.javafx.scene.control=com.jfoenix",
+                   "javafx.base/com.sun.javafx.event=com.jfoenix",
+        ])
 }
 
 task javadocJar(type: Jar) {

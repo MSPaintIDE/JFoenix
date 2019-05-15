@@ -1,4 +1,4 @@
 include 'jfoenix'
-include 'demo'
+//include 'demo'
 
-rootProject.name = 'jfoenix-root'
+rootProject.name = 'jfoenix'

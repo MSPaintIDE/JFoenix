@@ -23,7 +23,6 @@ import com.jfoenix.transitions.JFXAnimationTimer;
 import com.jfoenix.transitions.JFXKeyFrame;
 import com.jfoenix.transitions.JFXKeyValue;
 import com.sun.javafx.event.EventHandlerManager;
-import com.sun.javafx.scene.control.skin.TooltipSkin;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventDispatchChain;
@@ -36,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Skin;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.skin.TooltipSkin;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
@@ -498,9 +498,17 @@ public class JFXTooltip extends Tooltip {
         private void ensureHoveredNodeIsVisible(Runnable visibleRunnable) {
             final Window owner = getWindow(hoveredNode);
             if (owner != null && owner.isShowing()) {
-                final boolean treeVisible = hoveredNode.impl_isTreeVisible();
-                if (treeVisible) {
-                    visibleRunnable.run();
+
+                try {
+                    var field = hoveredNode.getClass().getDeclaredMethod("isTreeVisible");
+                    field.setAccessible(true);
+                    final boolean treeVisible = (boolean) field.invoke(hoveredNode);
+
+                    if (treeVisible) {
+                        visibleRunnable.run();
+                    }
+                } catch (ReflectiveOperationException e) {
+                    e.printStackTrace();
                 }
             }
         }
